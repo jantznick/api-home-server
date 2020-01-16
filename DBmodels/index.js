@@ -2,13 +2,17 @@ var fs = require("fs");
 var path = require("path");
 var Sequelize = require("sequelize");
 var sequelize = new Sequelize(
-	config.database,
-	config.username,
-	config.password,
-	config
+	process.env.DB_DATABASE,
+	process.env.DB_USERNAME,
+	process.env.DB_PASSWORD,
+	{
+		dialect: 'mysql',
+		host: process.env.DB_HOST
+	}
 );
 var db = {};
- 
+
+console.log(process.env.DB_DATABASE);
 fs
     .readdirSync(__dirname)
     .filter(function(file) {

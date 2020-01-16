@@ -4,32 +4,30 @@ server          = require('http').createServer(app);
 io              = require('socket.io')(server);
 methodOverride  = require('method-override'),
 bodyParser      = require('body-parser'),
-env             = require("dotenv"),
+env             = require("dotenv").config(),
 mysql           = require('mysql'),
 passport        = require('passport'),
 localStrategy   = require('passport-local'),
 sequelize       = require('sequelize'),
 session         = require('express-session');
 
-var omdbKey = "169527a1";
-var plexToken = "8GtPoY9QxszkJ3i8GCSB";
-
 //Models
-// var models = require("./app/models");
+var models = require('./DBmodels');
 
 //load passport strategies
 // require('./app/config/passport/passport.js')(passport, models.user);
+require('./config/passport.js')(passport, models.user);
 
 //Sync Database
-// models.sequelize.sync().then(function() {
-//     console.log('Nice! Database looks fine')
-// }).catch(function(err) {
-//     console.log(err, "Something went wrong with the Database Update!")
-// });
+models.sequelize.sync().then(function() {
+    console.log('Nice! Database looks fine')
+}).catch(function(err) {
+    console.log(err, "Something went wrong with the Database Update!")
+});
 
 app.use(methodOverride('_method'));
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // For Passport
 app.use(session({
@@ -53,6 +51,8 @@ function isLoggedIn(req, res, next) {
 }
 
 app.use("/baby", require('./routes/baby'));
+
+app.use("/user", require('./routes/user'));
 
 //************************
 //APP ROUTES

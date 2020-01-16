@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
  
-    var User = sequelize.define('user', {
+    var Feeding = sequelize.define('feeding', {
  
         id: {
             autoIncrement: true,
@@ -8,51 +8,28 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.INTEGER
         },
  
-        firstname: {
-            type: Sequelize.STRING,
-            notEmpty: true
+        breast: {
+            type: Sequelize.ENUM('left', 'right')
         },
  
-        lastname: {
-            type: Sequelize.STRING,
-            notEmpty: true
-        },
- 
-        username: {
-            type: Sequelize.TEXT
-        },
- 
-        about: {
-            type: Sequelize.TEXT
-        },
- 
-        email: {
-            type: Sequelize.STRING,
-            validate: {
-                isEmail: true
-            }
-        },
- 
-        password: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
- 
-        last_login: {
+        startTime: {
             type: Sequelize.DATE
         },
- 
-        status: {
-            type: Sequelize.ENUM('active', 'inactive', 'guest', 'need-auth'),
-            defaultValue: 'need-auth'
+
+        finishTime: {
+            type: Sequelize.DATE
         },
-        
-        permissions: {
-            type: Sequelize.STRING
+
+        amount: {
+            type: Sequelize.INTEGER
+        },
+
+        addedBy: {
+            type: Sequelize.INTEGER
         }
  
     });
  
-    return User;
+    return Feeding;
  
 }

@@ -20,9 +20,9 @@ require('./config/passport.js')(passport, models.user);
 
 //Sync Database
 models.sequelize.sync().then(function() {
-    console.log('Nice! Database looks fine')
+	console.log('Nice! Database looks fine')
 }).catch(function(err) {
-    console.log(err, "Something went wrong with the Database Update!")
+	console.log(err, "Something went wrong with the Database Update!")
 });
 
 app.use(methodOverride('_method'));
@@ -31,23 +31,23 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // For Passport
 app.use(session({
-    secret: 'jantzHOUSE authentication key',
-    resave: true,
-    saveUninitialized:true,
-    cookie: {
-        maxAge: 604800000
-    }
+	secret: 'jantzHOUSE authentication key',
+	resave: true,
+	saveUninitialized:true,
+	cookie: {
+		maxAge: 604800000
+	}
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 //Ensure user is loggedin before viewing certain pages
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        res.redirect('/');
-    }
+	if (req.isAuthenticated()) {
+		return next();
+	} else {
+		res.redirect('/');
+	}
 }
 
 app.use("/baby", require('./routes/baby'));
@@ -66,15 +66,15 @@ app.use("/user", require('./routes/user'));
 // });
 
 app.use("*", function(req, res) {
-    res.status(404).json({
-        result: 'error',
-        message: 'route not found'
-    })
+	res.status(404).json({
+		result: 'error',
+		message: 'route not found'
+	})
 });
 
 //************************
 //START APP
 //************************
 server.listen(3001, function(){
-    console.log("API SERVER IS RUNNING ON PORT 3001!");
+	console.log("API SERVER IS RUNNING ON PORT 3001!");
 });

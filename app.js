@@ -20,9 +20,9 @@ require('./config/passport.js')(passport, models.user);
 
 //Sync Database
 models.sequelize.sync().then(function() {
-	console.log('Nice! Database looks fine')
+	console.log('Database sync successful')
 }).catch(function(err) {
-	console.log(err, "Something went wrong with the Database Update!")
+	console.log(err, "Database sync failed")
 });
 
 app.use(methodOverride('_method'));
@@ -41,29 +41,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-//Ensure user is loggedin before viewing certain pages
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	} else {
-		res.redirect('/');
-	}
-}
-
-app.use("/baby", require('./routes/baby'));
-
-app.use("/user", require('./routes/user'));
+app.use("/api", require('./routes/api/index'));
 
 //************************
 //APP ROUTES
 //************************
-// app.get("/", function(req,res){
-//     if (req.isAuthenticated()) {
-//         res.render('home');
-//     } else {
-//         res.render('index');
-//     }
-// });
 
 app.use("*", function(req, res) {
 	res.status(404).json({

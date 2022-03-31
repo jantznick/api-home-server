@@ -40,6 +40,10 @@ module.exports = function(sequelize, Sequelize) {
 
 		last_login: {
 			type: Sequelize.DATE
+		},
+
+		role: {
+			type: Sequelize.INTEGER,
 		}
 
 	});

@@ -1,7 +1,18 @@
 const express = require('express');
-const app = express();
 const env = require("dotenv").config();
 const bodyParser = require('body-parser');
+const Sequelize = require("sequelize");
+
+var models = require('./DBmodels');
+
+models.sequelize.sync().then(function() {
+	console.log('Database sync successful')
+}).catch(function(err) {
+	console.log(err, "Database sync failed, cannot start server")
+	process.exit();
+});
+
+const app = express();
 
 app.use(bodyParser.json());
 

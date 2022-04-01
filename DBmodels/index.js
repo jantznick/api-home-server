@@ -1,25 +1,19 @@
 var fs = require("fs");
 var path = require("path");
 var Sequelize = require("sequelize");
-var sequelize = new Sequelize(
-	process.env.DB_DATABASE,
-	process.env.DB_USERNAME,
-	process.env.DB_PASSWORD,
-	{
-		dialect: 'sqlite',
-		storage: 'path/to/database.sqlite'
-	}
-);
+var sequelize = new Sequelize({
+	dialect: 'sqlite',
+	storage: 'home.db'
+});
 var db = {};
 
-console.log(process.env.DB_DATABASE);
 fs
 	.readdirSync(__dirname)
 	.filter(function(file) {
 		return (file.indexOf(".") !== 0) && (file !== "index.js");
 	})
 	.forEach(function(file) {
-		var model = sequelize.import(path.join(__dirname, file));
+		var model = sequelize.define(path.join(__dirname, file));
 		db[model.name] = model;
 	});
 

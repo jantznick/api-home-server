@@ -20,7 +20,7 @@
         0: 'Kitchen'
     },
     // multiple records hold all values of rooms that a user can control
-    // ex: "get * rooms where personId = x"
+    // ex: "get * rooms where personId = x" used to create arrays of rooms a user can control
     userRooms: {
         personId: int,
         room: int

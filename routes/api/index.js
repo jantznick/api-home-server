@@ -4,7 +4,6 @@ const api = express.Router();
 const user = require('./user.js');
 
 module.exports = (function() {
-
 	api.use("*", function(req,res,next){
 		console.log("API index file");
 		console.log(req.body);

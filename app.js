@@ -3,7 +3,7 @@ const env = require("dotenv").config();
 const bodyParser = require('body-parser');
 const Sequelize = require("sequelize");
 
-var models = require('./DBmodels');
+var models = require('./api/DBmodels');
 
 models.sequelize.sync().then(function() {
 	console.log('Database sync successful')
@@ -32,12 +32,7 @@ app.use("/api", require('./routes/api/index'));
 //APP ROUTES
 //************************
 
-app.use("*", function(req, res) {
-	res.status(404).json({
-		result: 'error',
-		message: 'route not found'
-	})
-});
+require('./routes/app/index')(app);
 
 //************************
 //START APP

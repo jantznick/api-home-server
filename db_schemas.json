@@ -1,0 +1,28 @@
+{
+    user: {
+        email: 'string',
+        password: 'string',
+        firstName: 'string',
+        lastName: 'string',
+        userName: 'string',
+        about: 'string',
+        lastLogin: date,
+        role: 1,
+        rooms: 
+    },
+    userRoles: {
+        0: 'admin',
+        1: 'resident',
+        2: 'guest',
+        3: 'iot'
+    },
+    rooms: {
+        0: 'Kitchen'
+    },
+    // multiple records hold all values of rooms that a user can control
+    // ex: "get * rooms where personId = x"
+    userRooms: {
+        personId: int,
+        room: int
+    }
+}

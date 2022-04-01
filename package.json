@@ -1,7 +1,7 @@
 {
 	"name": "api-home-server",
 	"version": "1.0.0",
-	"description": "An API server for a home server",
+	"description": "An API backend for a home server",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -11,18 +11,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"bcrypt-nodejs": "0.0.3",
-		"body-parser": "^1.19.0",
+		"body-parser": "^1.19.2",
 		"dotenv": "^8.2.0",
-		"express": "^4.17.1",
-		"express-session": "^1.17.0",
-		"method-override": "^3.0.0",
-		"mysql": "^2.17.1",
-		"mysql2": "^2.0.2",
-		"passport": "file:passport",
-		"passport-local": "file:passport-local-api",
-		"passport-local-sequelize": "^0.9.0",
-		"sequelize": "^5.21.2",
-		"socket.io": "^2.3.0"
+		"express": "^4.17.1"
 	}
 }

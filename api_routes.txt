@@ -1,0 +1,11 @@
+/api
+    /user
+        /create
+        /login
+        /logout
+        /edit
+    /rooms
+        /create
+        /edit
+        /delete
+

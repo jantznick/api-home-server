@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
 
-	var userRoles = sequelize.define('userRoles', {
+	var rooms = sequelize.define('rooms', {
 		id: {
 			primaryKey: true,
 			type: Sequelize.INTEGER,
@@ -11,6 +11,6 @@ module.exports = function(sequelize, Sequelize) {
         }
 	});
 
-	return userRoles;
+	return rooms;
 
 }

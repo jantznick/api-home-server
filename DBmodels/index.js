@@ -6,8 +6,8 @@ var sequelize = new Sequelize(
 	process.env.DB_USERNAME,
 	process.env.DB_PASSWORD,
 	{
-		dialect: 'mysql',
-		host: process.env.DB_HOST
+		dialect: 'sqlite',
+		storage: 'path/to/database.sqlite'
 	}
 );
 var db = {};

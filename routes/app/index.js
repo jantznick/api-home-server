@@ -1,17 +1,17 @@
 var path = require("path");
 
-module.exports = function(app) {
-	app.use("*", function(req,res,next){
+module.exports = (app) => {
+	app.use("*", (req,res,next) => {
 		console.log("app index file");
 		next();
 	})
 
 	// "../../app/components/login.html"
-	app.get("/login", function(req,res) {
+	app.get("/login", (req,res) => {
 		res.sendFile(path.join(__dirname, '../../app/components', 'login.html'));
 	});
 
-	app.get("/auth-only", function(req, res) {
+	app.get("/auth-only", (req, res) => {
 		console.log(req.session);
 		if(req.isAuthenticated()) {
 			return res.sendFile(path.join(__dirname, '../../app/components', 'auth-only.html'));
@@ -23,7 +23,7 @@ module.exports = function(app) {
 		res.send("App call to: " + req.params.handler);
 	});
 
-	app.use("*", function(req,res) {
+	app.use("*", (req,res) => {
 		res.send("APP CALL ENDED");
 	});
 };

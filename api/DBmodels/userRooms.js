@@ -1,4 +1,4 @@
-module.exports = function(sequelize, Sequelize) {
+module.exports = (sequelize, Sequelize) => {
 
 	var userRooms = sequelize.define('userRooms', {
 		id: {

@@ -11,9 +11,9 @@ var db = require('./api/DBmodels');
 
 require('./api/config/passport')(passport, db.user);
 
-db.sequelize.sync().then(function() {
+db.sequelize.sync().then(() => {
 	console.log('Database sync successful')
-}).catch(function(err) {
+}).catch((err) => {
 	console.log(err, "Database sync failed, cannot start server")
 	process.exit();
 });
@@ -38,7 +38,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("*", function(req,res,next){
+app.use("*", (req,res,next) => {
 	console.log("Index print body");
 	console.log(req.body);
 	console.log(req.isAuthenticated());
@@ -60,6 +60,6 @@ require('./routes/app/index')(app);
 //************************
 //START APP
 //************************
-app.listen(3001, function(){
+app.listen(3001, () => {
 	console.log("API SERVER IS RUNNING ON PORT 3001!");
 });

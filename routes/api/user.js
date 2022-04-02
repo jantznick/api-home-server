@@ -5,15 +5,15 @@ const passport = require('passport');
 
 const errorCodes = require('../../errorCodes');
 
-module.exports = (function() {
+module.exports = (() => {
 
-	api.use("*", function(req,res,next){
+	api.use("*", (req,res,next) => {
 		console.log("User API index file");
 		next();
 	})
 
 	api.post("/register", (req, res) => {
-		passport.authenticate('local-signup', function(err, user, info){
+		passport.authenticate('local-signup', (err, user, info) => {
 			if(err || info) {
 				res.json(errorCodes.registerFailure)
 			}
@@ -24,7 +24,7 @@ module.exports = (function() {
 	});
 
 	api.post("/login", (req, res) => {
-		passport.authenticate('local-signin', function(err, user, info){
+		passport.authenticate('local-signin', (err, user, info) => {
 			if(err || info) {
 				res.json(errorCodes.loginFailure)
 			}
@@ -48,7 +48,7 @@ module.exports = (function() {
 		res.send("User API Call to: " + req.params.handler);
 	});
 
-	api.use("*", function(req,res) {
+	api.use("*", (req,res) => {
 		res.send("USER API CALL ENDED");
 	});
 

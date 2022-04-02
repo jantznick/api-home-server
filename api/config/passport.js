@@ -1,9 +1,18 @@
-var bCrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
+const LocalStrategy = require('passport-local');
+// const models = require('../DBmodels');
+// var passport = require('passport');
+
+const generateHash = function(password) {
+	return bcrypt.hashSync(password, 8);
+};
+
+const isValidPassword = function(password, hash) {
+	return bcrypt.compareSync(password, hash);
+};
 
 module.exports = function(passport, user) {
-
 	var User = user;
-	var LocalStrategy = require('passport-local').Strategy;
 	passport.use('local-signup', new LocalStrategy(
 		{
 			usernameField: 'email',
@@ -11,9 +20,6 @@ module.exports = function(passport, user) {
 			passReqToCallback: true // allows us to pass back the entire request to the callback
 		},
 		function(req, email, password, done) {
-			var generateHash = function(password) {
-				return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-			};
 			User.findOne({
 				where: {
 					email: email
@@ -57,9 +63,6 @@ module.exports = function(passport, user) {
 		},
 		function(req, email, password, done) {
 			var User = user;
-			var isValidPassword = function(userpass, password) {
-				return bCrypt.compareSync(password, userpass);
-			};
 			User.findOne({
 				where: {
 					email: email
@@ -70,7 +73,7 @@ module.exports = function(passport, user) {
 						message: 'Email does not exist'
 					});
 				}
-				if (!isValidPassword(user.password, password)) {
+				if (!isValidPassword(password, user.password)) {
 					return done(null, false, {
 						message: 'Incorrect password.'
 					});
@@ -104,5 +107,4 @@ module.exports = function(passport, user) {
 			}
 		});
 	});
-
 };

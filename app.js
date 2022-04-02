@@ -2,8 +2,11 @@ const express = require('express');
 const env = require("dotenv").config();
 const bodyParser = require('body-parser');
 const Sequelize = require("sequelize");
+const passport = require("passport");
 
 var models = require('./api/DBmodels');
+
+require('./api/config/passport')(passport, models.user);
 
 models.sequelize.sync().then(function() {
 	console.log('Database sync successful')

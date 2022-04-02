@@ -5,7 +5,6 @@ const user = require('./user.js');
 
 module.exports = (() => {
 	api.use("*", (req,res,next) => {
-		console.log("API index file");
 		next();
 	})
 

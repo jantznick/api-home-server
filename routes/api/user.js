@@ -8,7 +8,6 @@ const errorCodes = require('../../errorCodes');
 module.exports = (() => {
 
 	api.use("*", (req,res,next) => {
-		console.log("User API index file");
 		next();
 	})
 

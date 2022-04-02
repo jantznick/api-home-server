@@ -19,26 +19,23 @@ module.exports = function(passport, user) {
 			passwordField: 'password',
 			passReqToCallback: true // allows us to pass back the entire request to the callback
 		},
-		function(req, email, password, done) {
+		(req, email, password, done) => {
 			User.findOne({
 				where: {
 					email: email
 				}
 			}).then(function(user) {
-				if (user)
-				{
+				if (user) {
 					return done(null, false, {
 						message: 'That email is already taken'
 					});
-				} else
-				{
+				} else {
 					var userPassword = generateHash(password);
 					var data =
 						{
 							email: email,
 							password: userPassword,
-							firstname: req.body.firstname,
-							lastname: req.body.lastname
+							...req.body
 						};
 					User.create(data).then(function(newUser, created) {
 						if (!newUser) {
@@ -91,14 +88,13 @@ module.exports = function(passport, user) {
 
 	//serialize
 	passport.serializeUser(function(user, done) {
-	console.log("SERIALIZE");
+		console.log("SERIALIZE");
 		done(null, user.id);
-
 	});
 
 	// deserialize user
 	passport.deserializeUser(function(id, done) {
-	console.log("DESERIALIZE");
+		console.log("DESERIALIZE");
 		User.findByPk(id).then(function(user) {
 			if (user) {
 				done(null, user.get());

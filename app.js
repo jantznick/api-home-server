@@ -3,12 +3,15 @@ const env = require("dotenv").config();
 const bodyParser = require('body-parser');
 const Sequelize = require("sequelize");
 const passport = require("passport");
+const session = require("express-session");
 
-var models = require('./api/DBmodels');
+var SequelizeStore = require("connect-session-sequelize")(session.Store);
 
-require('./api/config/passport')(passport, models.user);
+var db = require('./api/DBmodels');
 
-models.sequelize.sync().then(function() {
+require('./api/config/passport')(passport, db.user);
+
+db.sequelize.sync().then(function() {
 	console.log('Database sync successful')
 }).catch(function(err) {
 	console.log(err, "Database sync failed, cannot start server")
@@ -18,10 +21,27 @@ models.sequelize.sync().then(function() {
 const app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(session({
+	secret: 'secret',
+	saveUninitialized: false,
+	resave: false,
+	store: new SequelizeStore({
+		db: db.sequelize,
+	}),
+	cookie: {
+		secure: false
+	}
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("*", function(req,res,next){
 	console.log("Index print body");
 	console.log(req.body);
+	console.log(req.isAuthenticated());
 	next();
 });
 

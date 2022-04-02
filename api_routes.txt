@@ -4,6 +4,7 @@
         /login
         /logout
         /edit
+        /forgot-password
     /rooms
         /create
         /edit

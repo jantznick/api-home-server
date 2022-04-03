@@ -1,4 +1,12 @@
 module.exports = {
+	testSuccess: {
+		code: 101,
+		message: 'Test API Call successful'
+	},
+	testFailure: {
+		code: 102,
+		message: 'Test API Call failure'
+	},
 	registerFailure: {
 		code: 4001,
 		message: 'Failed to register'

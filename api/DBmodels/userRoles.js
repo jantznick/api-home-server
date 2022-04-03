@@ -4,11 +4,11 @@ module.exports = (sequelize, Sequelize) => {
 		id: {
 			primaryKey: true,
 			type: Sequelize.INTEGER,
-            notEmpty: true
+			notEmpty: true
 		},
 		name: {
-            type: Sequelize.STRING
-        }
+			type: Sequelize.STRING
+		}
 	});
 
 	return userRoles;

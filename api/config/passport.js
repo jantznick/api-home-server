@@ -1,7 +1,5 @@
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local');
-// const models = require('../DBmodels');
-// var passport = require('passport');
 
 const generateHash = (password) => {
 	return bcrypt.hashSync(password, 8);

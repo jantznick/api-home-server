@@ -1,11 +1,11 @@
-var path = require("path");
+const path = require("path");
 
 module.exports = (app) => {
-	app.use("*", (req,res,next) => {
+	app.use("*", (req, res, next) => {
 		next();
-	})
+	});
 
-	app.get("/login", (req,res) => {
+	app.get("/login", (req, res) => {
 		res.sendFile(path.join(__dirname, '../../app/components', 'login.html'));
 	});
 
@@ -16,11 +16,11 @@ module.exports = (app) => {
 		res.send("App call to: " + req.params.handler);
 	});
 
-	app.get("/:handler", (req,res) => {
+	app.get("/:handler", (req, res) => {
 		res.send("App call to: " + req.params.handler);
 	});
 
-	app.use("*", (req,res) => {
+	app.use("*", (req, res) => {
 		res.send("APP CALL ENDED");
 	});
 };

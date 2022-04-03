@@ -38,10 +38,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("*", (req,res,next) => {
-	console.log("Index print body");
-	console.log(req.body);
-	console.log(req.isAuthenticated());
+app.use("*", (req, res, next) => {
 	next();
 });
 

@@ -7,7 +7,7 @@ const errorCodes = require('../../errorCodes');
 
 module.exports = (() => {
 
-	api.use("*", (req,res,next) => {
+	api.use("*", (req, res, next) => {
 		next();
 	})
 
@@ -43,11 +43,11 @@ module.exports = (() => {
 		res.json(errorCodes.logoutSuccess)
 	})
 
-	api.get("/:handler", (req,res) => {
+	api.get("/:handler", (req, res) => {
 		res.send("User API Call to: " + req.params.handler);
 	});
 
-	api.use("*", (req,res) => {
+	api.use("*", (req, res) => {
 		res.send("USER API CALL ENDED");
 	});
 

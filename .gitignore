@@ -106,3 +106,7 @@ dist
 package-lock.json
 
 *.db
+
+# don't add webpack builds to git
+server.js
+public/*

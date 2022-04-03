@@ -1,16 +1,24 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
 <body>
-    <h1>This only works if the user is logged in</h1>
-    <form action="/api/user/logout" method="post">
-        <div>
-            <button type="submit">Logout</button>
-        </div>
-    </form>
+	<h1>This only works if the user is logged in</h1>
+	<form action="/api/user/logout" method="post">
+		<div>
+			<button type="submit">Logout</button>
+		</div>
+	</form>
+	<button id="background" type="submit">Get Data</button>
+	<script>
+		document.getElementById('background').addEventListener("click",() => {
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "/api/test", true);
+			xhttp.send();
+		})
+	</script>
 </body>
 </html>
